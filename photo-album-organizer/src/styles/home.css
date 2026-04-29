@@ -1,0 +1,208 @@
+/* ============================================================
+   Home page — album grid, date-group headers, drag-and-drop
+   ============================================================ */
+
+/* Page layout */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-5) var(--space-6);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.page-header h1 {
+  font-size: var(--font-size-2xl);
+}
+
+.albums-container {
+  padding: var(--space-6);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Date group */
+.date-group {
+  margin-bottom: var(--space-7);
+}
+
+.date-group-heading {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Album grid */
+.album-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-4);
+}
+
+/* Album tile */
+.album-tile {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+  user-select: none;
+}
+
+.album-tile:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Cover image */
+.album-cover {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.album-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-base);
+}
+
+.album-tile:hover .album-cover img {
+  transform: scale(1.04);
+}
+
+.album-cover--placeholder {
+  background: var(--color-border);
+}
+
+.album-cover__icon {
+  font-size: 2.5rem;
+  opacity: 0.4;
+}
+
+/* Album info */
+.album-info {
+  padding: var(--space-3);
+}
+
+.album-name {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--color-text);
+}
+
+.album-count {
+  display: block;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+}
+
+/* Album context menu */
+.album-menu {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  z-index: 5;
+}
+
+.album-menu-btn {
+  background: rgba(255, 255, 255, 0.85);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 2px 6px;
+  font-size: var(--font-size-lg);
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.album-tile:hover .album-menu-btn {
+  opacity: 1;
+}
+
+.album-menu-dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  min-width: 120px;
+  overflow: hidden;
+}
+
+.album-menu-dropdown.hidden {
+  display: none;
+}
+
+.album-menu-item {
+  display: block;
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  font-size: var(--font-size-sm);
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+.album-menu-item:hover {
+  background: var(--color-bg);
+}
+
+.album-menu-item--danger {
+  color: var(--color-danger);
+}
+
+/* Empty state */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* Drag-and-drop indicators */
+.album-tile.dragging {
+  opacity: 0.4;
+  box-shadow: none;
+}
+
+.album-tile.drag-over {
+  outline: 2px dashed var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .page-header { padding: var(--space-4); }
+  .albums-container { padding: var(--space-4); }
+  .album-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--space-3); }
+}
+
+@media (min-width: 1024px) {
+  .album-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+}
